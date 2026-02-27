@@ -1,0 +1,13 @@
+{
+  "name": "server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Backend NestJS de Smart Recruitment",
+  "scripts": {
+    "dev": "nest start --watch",
+    "build": "nest build",
+    "start": "nest start",
+    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "test": "jest"
+  }
+}
