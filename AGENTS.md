@@ -89,4 +89,3 @@ Este documento contiene las instrucciones críticas, la arquitectura y las regla
 2. **CHANGELOG:** El asistente ahora sabe que no puede poner "2023-01-01". Usará la fecha del día en que estás trabajando.
 3. **Versiones:** Esto te ayudará a saber qué tan avanzado está el proyecto (ej: Versión 0.5.0 suele indicar que estás a mitad de camino).
 
-¿Te parece que con este archivo `AGENTS.md` ya estamos listos para que crees el repositorio y empieces a dar las primeras instrucciones de código?
