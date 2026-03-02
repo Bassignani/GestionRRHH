@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2026-03-02
+### Added
+- Frontend base initialization in `/client` with Next.js App Router, TypeScript, Tailwind CSS, PostCSS, and initial linting configuration.
+- Login page at `/login` with a professional visual style for Smart Recruitment (Oil & Gas).
+- Dashboard shell with sidebar navigation and starter KPI cards.
+- Candidates module UI with lateral filters (zona, rotación, estado médico) and listing table component.
+- Split-screen validation UI for file preview vs structured form validation in `/dashboard/validation`.
+- Technical frontend documentation in `/docs/frontend-ui.md`.
+
+### Changed
+- Bumped monorepo root version to `0.1.2`.
+- Bumped frontend `/client` package version to `0.1.1`.
+
 ## [0.1.1] - 2026-03-02
 ### Added
 - Backend NestJS base bootstrap in `/server` with `AppModule`, `main.ts`, and TypeORM async configuration via environment variables.
