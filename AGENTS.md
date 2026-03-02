@@ -82,7 +82,7 @@ Este documento contiene las instrucciones críticas, la arquitectura y las regla
 5.  **Cierre de Tarea**: Antes de finalizar, el asistente debe:
     - Actualizar `package.json` (Versión).
     - Actualizar `CHANGELOG.md` (Keep a Changelog).
-    - Generar documentación técnica en `/docs`.
+    - Generar documentación técnica en `/docs` (siempre en español; si existe documentación en inglés dentro de `/docs`, traducirla al español).
 
 ### Notas Adicionales para tu flujo de trabajo:
 1. **Carpeta `/docs`:** Cada vez que el asistente cree una función (por ejemplo, el parsing de IA), le puedes decir: *"Crea la documentación técnica de este módulo en /docs/ia-parsing.md"*.

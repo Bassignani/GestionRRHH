@@ -1,14 +1,14 @@
-# Backend DB Architecture (NestJS + TypeORM)
+# Arquitectura de Base de Datos Backend (NestJS + TypeORM)
 
-## Overview
-This document describes the first backend database architecture for **Smart Recruitment** in the `/server` app using NestJS + TypeORM over PostgreSQL.
+## Resumen
+Este documento describe la primera arquitectura de base de datos backend para **Smart Recruitment** en la aplicación `/server`, usando NestJS + TypeORM sobre PostgreSQL.
 
-## Connection and environment strategy
-- The backend uses `@nestjs/config` to load environment values from `.env.local` and `.env`.
-- TypeORM is configured via `forRootAsync` and a centralized factory in `src/config/typeorm.config.ts`.
-- A TypeORM CLI DataSource is available at `src/database/data-source.ts` for migration workflows.
+## Estrategia de conexión y variables de entorno
+- El backend utiliza `@nestjs/config` para cargar variables de entorno desde `.env.local` y `.env`.
+- TypeORM se configura mediante `forRootAsync` y una fábrica centralizada en `src/config/typeorm.config.ts`.
+- Hay un DataSource de TypeORM disponible en `src/database/data-source.ts` para los flujos de migraciones.
 
-### Required environment variables
+### Variables de entorno requeridas
 - `PORT`
 - `DB_HOST`
 - `DB_PORT`
@@ -16,59 +16,59 @@ This document describes the first backend database architecture for **Smart Recr
 - `DB_PASSWORD`
 - `DB_NAME`
 
-## Entities included in this initialization
+## Entidades incluidas en esta inicialización
 
-### Security / Access
+### Seguridad / Acceso
 1. **Role** (`roles`)
-   - `id`, `name` (unique), `description`
-   - Relations:
-     - One-to-many with `User`
-     - Many-to-many with `Permission` through `role_permissions`
+   - `id`, `name` (único), `description`
+   - Relaciones:
+     - Uno-a-muchos con `User`
+     - Muchos-a-muchos con `Permission` a través de `role_permissions`
 
 2. **Permission** (`permissions`)
    - `id`, `action`, `module`
-   - Relations:
-     - Many-to-many with `Role`
+   - Relaciones:
+     - Muchos-a-muchos con `Role`
 
 3. **User** (`users`)
-   - `id` (UUID), `email` (unique), `password`, `first_name`, `last_name`, `is_active`
-   - Relations:
-     - Many-to-one with `Role` using `role_id`
+   - `id` (UUID), `email` (único), `password`, `first_name`, `last_name`, `is_active`
+   - Relaciones:
+     - Muchos-a-uno con `Role` usando `role_id`
 
-### Talent Management
+### Gestión de Talento
 4. **Candidate** (`candidates`)
-   - `id` (UUID), `dni` (unique index), `first_name`, `last_name`, `nationality`, `address`, `marital_status`, `email`, `phone`, `zone_id`, `rotation_id`, `medical_status`, `ai_raw_data`
-   - `status` enum: `Active | Archived`
-   - Relations:
-     - One-to-many with `WorkExperience`
-     - One-to-many with `Attachment`
+   - `id` (UUID), `dni` (índice único), `first_name`, `last_name`, `nationality`, `address`, `marital_status`, `email`, `phone`, `zone_id`, `rotation_id`, `medical_status`, `ai_raw_data`
+   - Enum `status`: `Active | Archived`
+   - Relaciones:
+     - Uno-a-muchos con `WorkExperience`
+     - Uno-a-muchos con `Attachment`
 
 5. **WorkExperience** (`work_experiences`)
    - `id`, `candidate_id`, `company`, `position`, `start_date`, `end_date`, `description`
-   - Relation:
-     - Many-to-one with `Candidate`
+   - Relación:
+     - Muchos-a-uno con `Candidate`
 
 6. **Attachment** (`attachments`)
    - `id`, `candidate_id`, `type`, `file_url`, `original_name`
-   - `type` enum: `CV | ID_Card | Medical | Certification`
-   - Relation:
-     - Many-to-one with `Candidate`
+   - Enum `type`: `CV | ID_Card | Medical | Certification`
+   - Relación:
+     - Muchos-a-uno con `Candidate`
 
-## Soft Delete strategy for Candidate
-- Physical deletion is not used for `Candidate`.
-- The model implements a logical archive through `Candidate.status`.
-- The helper method `archive()` sets status to `Archived`.
-- Query-level filtering (active-only vs archived) should be enforced in service/repository methods and RBAC guards in future endpoints.
+## Estrategia de borrado lógico para Candidate
+- No se utiliza borrado físico para `Candidate`.
+- El modelo implementa archivado lógico mediante `Candidate.status`.
+- El método auxiliar `archive()` cambia el estado a `Archived`.
+- El filtrado por consultas (solo activos vs archivados) debe reforzarse en métodos de servicio/repositorio y en guards de RBAC en endpoints futuros.
 
-## Initial migration
-- Migration file: `src/database/migrations/1760000000000-InitialSchema.ts`
-- Creates:
-  - enums for candidate status and attachment type
-  - tables: `roles`, `permissions`, `users`, `candidates`, `work_experiences`, `attachments`, `role_permissions`
-  - constraints, indexes and FK relations
-  - `uuid-ossp` extension for UUID generation
+## Migración inicial
+- Archivo de migración: `src/database/migrations/1760000000000-InitialSchema.ts`
+- Crea:
+  - enums para estado de candidato y tipo de adjunto
+  - tablas: `roles`, `permissions`, `users`, `candidates`, `work_experiences`, `attachments`, `role_permissions`
+  - restricciones, índices y relaciones FK
+  - extensión `uuid-ossp` para generación de UUID
 
-## Dependencies
+## Dependencias
 - `@nestjs/config`
 - `@nestjs/typeorm`
 - `typeorm`
