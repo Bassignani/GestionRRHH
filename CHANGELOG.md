@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2026-03-02
+### Added
+- README principal del proyecto con descripción breve de la aplicación y pasos de inicialización para entorno local.
+
+### Changed
+- Regla en `AGENTS.md` actualizada para exigir que toda la documentación en `/docs` se redacte en español y que se traduzca cualquier contenido existente en inglés.
+- Traducción completa al español de `docs/backend-entities.md`.
+- Incremento de versión en `package.json` raíz a `0.1.3` y en `client/package.json` y `server/package.json` a `0.1.2`.
+
 ## [0.1.2] - 2026-03-02
 ### Added
 - Frontend base initialization in `/client` with Next.js App Router, TypeScript, Tailwind CSS, PostCSS, and initial linting configuration.
